@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<!--  ng-controller="AppCtrl as app" -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title ng-bind="app.name"></title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="vendor/css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container" ng-controller="cartController">
+        <h3 class="text-center">购物车</h3>
+        <table class="table  table-bordered">
+            <thead>
+                <th>商品种类</th>
+                <th>数量</th>
+                <th>单价</th>
+                <th>总价</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items">
+                    <td ng-bind="item.name"></td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="item.number">
+                    </td>
+                    <td ng-bind="item.price"></td>
+                    <td ng-bind="item.number * item.price |currency :'￥'"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" ng-click="remove($index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="col-sm-3">
+            总件数：<span ng-bind="shoppingNums"></span>
+        </div>
+        <div class="col-sm-3">
+            总价：<span ng-bind="shoppingPrice | currency :'￥'"></span>
+        </div>
+    </div>
+    <!--  {{app.name}} -->
+    <!--  <script src="vendor/jquery.js"></script> -->
+    <script src="vendor/angular.js"></script>
+    <!--   <script src="app/main.js"></script> -->
+    <script>
+    var app = angular.module('app', []);
+    app.controller('cartController', ['$scope', function($scope) {
+        $scope.items = [{
+            name: '苹果',
+            number: '11',
+            price: 3
+        }, {
+            name: '苹果',
+            number: '11',
+            price: 3
+        }, {
+            name: '苹果',
+            number: '11',
+            price: 3
+        }, {
+            name: '苹果',
+            number: '11',
+            price: 3
+        }]
+
+
+        $scope.remove = function($index) {
+            $scope.items.splice($index, 1)
+        }
+        $scope.$watch('items', function(olds, news) {
+            var num = 0,
+                prices = 0;
+
+            for (var i = 0; i < $scope.items.length; i++) {
+                console.log(1)
+                num += Number($scope.items[i].number);
+                prices += Number($scope.items[i].number * $scope.items[i].price);
+            }
+
+            $scope.shoppingNums = num;
+            $scope.shoppingPrice = prices;
+
+        }, true);
+
+    }])
+    </script>
+</body>
+
+</html>

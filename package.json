@@ -1,0 +1,22 @@
+{
+  "name": "angular-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^4.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.7",
+    "bootstrap": "^3.3.5",
+    "jquery": "^3.1.0"
+  },
+  "description": ""
+}
